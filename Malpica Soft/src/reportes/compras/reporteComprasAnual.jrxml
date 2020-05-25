@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteComprasAnual" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5d2efbb0-5da3-44c4-88e6-a89c0f9b14bf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha_carga" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     compras.`fecha_factura` AS compras_fecha_factura,
+     compras.`nro_factura` AS compras_nro_factura,
+     compras.`codigo` AS compras_codigo,
+     compras.`razon_social` AS compras_razon_social,
+     compras.`condicion` AS compras_condicion,
+     compras.`codigo_stock` AS compras_codigo_stock,
+     compras.`descripcion_stock` AS compras_descripcion_stock,
+     compras.`cantidad` AS compras_cantidad,
+     compras.`precio_unit` AS compras_precio_unit,
+     compras.`impuestos` AS compras_impuestos,
+     compras.`precio_total` AS compras_precio_total,
+     compras.`ano_factura` AS compras_ano_factura
+FROM
+     `compras` compras
+WHERE
+     compras.ano_factura = $P{fecha_carga}]]>
+	</queryString>
+	<field name="compras_fecha_factura" class="java.lang.String"/>
+	<field name="compras_nro_factura" class="java.lang.String"/>
+	<field name="compras_codigo" class="java.lang.String"/>
+	<field name="compras_razon_social" class="java.lang.String"/>
+	<field name="compras_condicion" class="java.lang.String"/>
+	<field name="compras_codigo_stock" class="java.lang.String"/>
+	<field name="compras_descripcion_stock" class="java.lang.String"/>
+	<field name="compras_cantidad" class="java.lang.Integer"/>
+	<field name="compras_precio_unit" class="java.lang.Double"/>
+	<field name="compras_impuestos" class="java.lang.Double"/>
+	<field name="compras_precio_total" class="java.lang.Double"/>
+	<field name="compras_ano_factura" class="java.lang.String"/>
+	<variable name="compras_cantidad_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{compras_cantidad}]]></variableExpression>
+	</variable>
+	<variable name="compras_precio_unit_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{compras_precio_unit}]]></variableExpression>
+	</variable>
+	<variable name="compras_impuestos_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{compras_impuestos}]]></variableExpression>
+	</variable>
+	<variable name="compras_precio_total_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{compras_precio_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="103" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="683" y="0" width="102" height="20" uuid="8d8cb0ae-7f9a-4f22-bc3b-e2c2502019a8"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="33" width="392" height="38" uuid="15c325ad-fe46-48d0-ac41-d18cb2461ee2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="28"/>
+				</textElement>
+				<text><![CDATA[Listado anual de Compras]]></text>
+			</staticText>
+			<image>
+				<reportElement x="40" y="1" width="70" height="70" uuid="d95c72b5-392e-4f8d-bbd5-afc19b235f50"/>
+				<imageExpression><![CDATA["C:\\Users\\marco\\Documents\\NetBeansProjects\\MalpicaSoft-Draft\\src\\images\\logos\\logo-reporte.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="25" y="71" width="104" height="20" forecolor="#999999" uuid="ca38d998-6253-435a-bc63-20d9406febbb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Engravers MT"/>
+				</textElement>
+				<text><![CDATA[Malpica Soft]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="353" y="0" width="30" height="20" uuid="fbe3d155-972b-4e27-87ca-fb473483730a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cond.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="0" width="130" height="20" uuid="c9508783-272d-4199-99ae-b4da6979c4f6"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Nombre del proveedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="0" width="70" height="20" uuid="2eb9b89e-c9ac-4f15-b7a1-3e10b4286b97"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código Prov.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="801" height="1" uuid="d56307a4-18ac-4e8d-b47a-23ce8576d550"/>
+			</line>
+			<line>
+				<reportElement x="65" y="0" width="1" height="19" uuid="1001073f-d97a-4e2e-afe8-3a0e4cae70c6"/>
+			</line>
+			<line>
+				<reportElement x="153" y="0" width="1" height="19" uuid="62900748-23c7-4797-8903-20322022e717"/>
+			</line>
+			<line>
+				<reportElement x="223" y="0" width="1" height="19" uuid="a0a322f1-e4e6-49e9-9a75-799405414c91"/>
+			</line>
+			<line>
+				<reportElement x="353" y="0" width="1" height="19" uuid="d62e772d-6364-4426-879c-3e89b798f1f3"/>
+			</line>
+			<line>
+				<reportElement x="383" y="0" width="1" height="19" uuid="1fa5bc16-6b1b-4cd0-822b-1f8a85396503"/>
+			</line>
+			<line>
+				<reportElement x="461" y="0" width="1" height="19" uuid="32023029-356a-452a-af54-ca5e06fd5969"/>
+			</line>
+			<line>
+				<reportElement x="594" y="0" width="1" height="19" uuid="5341ce15-0df4-46b2-8b99-8ff0bb8a6524"/>
+			</line>
+			<staticText>
+				<reportElement x="65" y="0" width="88" height="20" uuid="a8e8319d-d231-4e7a-b81d-a9e1f55b3e27"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="65" height="20" uuid="871db421-8e3c-4ab9-83fc-2c6c6576f558"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Comp.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="624" y="0" width="1" height="19" uuid="1b5c6334-9e9b-4a73-afba-c06ba8083779"/>
+			</line>
+			<line>
+				<reportElement x="687" y="0" width="1" height="19" uuid="4d0746ee-cde3-4ade-89ca-3beb3f64033b"/>
+			</line>
+			<line>
+				<reportElement x="739" y="0" width="1" height="19" uuid="f42aa878-9769-4b3b-88c0-14ba7f3cf7d3"/>
+			</line>
+			<staticText>
+				<reportElement x="594" y="0" width="30" height="20" uuid="671f3621-770f-46dc-bcdb-1728327a26f2"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="461" y="0" width="133" height="20" uuid="f99687dc-dbfb-49ac-ad4a-3d92e5af23d3"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción del producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="0" width="78" height="20" uuid="3a214760-2d27-458f-9694-1fa7bce4a6e9"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código Produc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="624" y="0" width="63" height="20" uuid="b804e160-9e62-477d-a60c-cba0ec20997b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Unit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="0" width="52" height="20" uuid="db393562-11d0-4574-b9d4-26c2b5a51c4b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Imp/Desc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="739" y="0" width="63" height="20" uuid="fab55b1f-0955-41fc-811b-35a7b86b564f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="19" width="801" height="1" uuid="f4d68b42-ec64-4ac4-a6e0-05d45e14abd6"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="65" height="20" uuid="6cb7f8c4-5ab3-4af6-a679-9461492471ec"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_fecha_factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="0" width="70" height="20" uuid="6372641d-9121-4e57-92ba-d0098278df34"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="130" height="20" uuid="376c0002-34f6-410f-bd9c-acbe0c48c38d"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_razon_social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="353" y="0" width="30" height="20" uuid="5b697b30-92ae-4601-a5e8-33847e9f13de"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_condicion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="78" height="20" uuid="f05cb5c9-29a0-4d4a-a131-3f5712e09e73"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_codigo_stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="0" width="133" height="20" uuid="4bb96a19-1fab-4764-a4bc-94ead8adcd82"/>
+				<textElement>
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_descripcion_stock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="594" y="0" width="30" height="20" uuid="edbaf0d6-6a7e-4931-abdc-a317bc3a2b6a"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="624" y="0" width="63" height="20" uuid="fc6153d1-6e31-491f-b5df-ac6ef9a1b025"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_precio_unit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="687" y="0" width="52" height="20" uuid="05cf1163-99d5-4f88-b8fc-3dea1d512efd"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_impuestos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="739" y="0" width="63" height="20" uuid="4c32f5be-faca-453e-946a-e02a75e9e7a3"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_precio_total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="739" y="0" width="1" height="19" uuid="45c4dc12-59b4-494e-91f5-7cad6d2ca899"/>
+			</line>
+			<line>
+				<reportElement x="687" y="0" width="1" height="19" uuid="98190776-909b-48c4-8614-d3e295fbd6a0"/>
+			</line>
+			<line>
+				<reportElement x="624" y="0" width="1" height="19" uuid="98e9057e-c571-4a00-ba07-2e4c262b47f1"/>
+			</line>
+			<line>
+				<reportElement x="594" y="0" width="1" height="19" uuid="c38014f3-a27c-40f2-8028-5f8555e3ad50"/>
+			</line>
+			<line>
+				<reportElement x="461" y="0" width="1" height="19" uuid="3a40dbc1-0ddb-4146-b246-a5e3d66ec88d"/>
+			</line>
+			<line>
+				<reportElement x="383" y="0" width="1" height="19" uuid="9402cf6f-a35b-4e50-8634-463ccba7e6df"/>
+			</line>
+			<line>
+				<reportElement x="353" y="0" width="1" height="19" uuid="20d12f5a-b6fe-4e42-a54e-967c289e5038"/>
+			</line>
+			<line>
+				<reportElement x="223" y="0" width="1" height="19" uuid="689eb72d-473a-4ff8-8955-6ea440f773b7"/>
+			</line>
+			<line>
+				<reportElement x="153" y="0" width="1" height="19" uuid="d98ace6e-1105-4bde-bdff-42b4b6dd15ed"/>
+			</line>
+			<line>
+				<reportElement x="65" y="0" width="1" height="19" uuid="82a75faf-fb01-48b4-95b1-05a7c1dacbc5"/>
+			</line>
+			<textField>
+				<reportElement x="65" y="0" width="88" height="20" uuid="c22f16b3-a9da-475f-b2fe-897ecd2b9188"/>
+				<textElement textAlignment="Left">
+					<font fontName="Calibri" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_nro_factura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="740" y="20" width="10" height="20" uuid="76a9a2fd-bccd-4edd-a0c8-40d971ec998a"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="451" y="20" width="43" height="20" uuid="7ca3ac0f-7442-44a2-b027-7965a3915fad"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Totales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="739" y="0" width="63" height="20" uuid="09dbf38a-b00f-43be-84ab-e66f45a484d7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Precio Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="0" width="30" height="20" uuid="2768dfc3-0215-4cdc-b3e6-3980f6135127"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Cant.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="687" y="0" width="52" height="20" uuid="f50461d8-dc87-414c-b203-9e71661d59bb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Imp/Desc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="678" y="20" width="10" height="20" uuid="a641edb9-89bc-451a-871a-2816e114d1c3"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="596" y="20" width="28" height="20" uuid="71b5b0fc-9dc1-4f41-8187-7a1a40841392"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compras_cantidad_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="687" y="20" width="45" height="20" uuid="625fd6f4-0987-4201-af12-51292843799e"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compras_impuestos_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="740" y="20" width="61" height="20" uuid="e20a98f6-5056-4d42-9264-c13cbb8baf02"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compras_precio_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="334" y="14" width="80" height="20" uuid="7f34900a-e340-46f5-9345-1e521a74f2d9"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="414" y="14" width="40" height="20" uuid="910124dc-f06e-41bb-8acd-cb8a33fc5aa4"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="7" splitType="Stretch"/>
+	</summary>
+</jasperReport>
